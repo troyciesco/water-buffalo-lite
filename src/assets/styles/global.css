@@ -1,0 +1,69 @@
+@import url("reset.css");
+@import url(https://fonts.bunny.net/css?family=atkinson-hyperlegible:400,400i,700,700i);
+
+:root {
+	--font-sans: "Atkinson Hyperlegible", sans-serif;
+
+	--color-primary-50: oklch(98.37% 0.011 174.86); /* #eefffa */
+	--color-primary-100: oklch(97.17% 0.037 173.27); /* #c5fff3 */
+	--color-primary-200: oklch(95.87% 0.074 173.27); /* #8cffe8 */
+	--color-primary-300: oklch(94.37% 0.111 173.27); /* #4afedb */
+	--color-primary-400: oklch(89.37% 0.127 174.86); /* #1becca */
+	--color-primary-500: oklch(81.37% 0.127 174.86); /* #00cfb0 */
+	--color-primary-600: oklch(67.37% 0.107 174.86); /* #00a792 */
+	--color-primary-700: oklch(54.37% 0.087 174.86); /* #008575 */
+	--color-primary-800: oklch(43.37% 0.067 174.86); /* #06695e */
+	--color-primary-900: oklch(35.37% 0.047 174.86); /* #0b564e */
+	--color-primary-950: oklch(22.37% 0.027 174.86); /* #003532 */
+	--color-primary-base: var(--color-primary-400);
+	--color-primary-dark: var(--color-primary-700);
+
+	--color-dark: oklch(0.279 0.041 260.031);
+	--color-dark-muted: oklch(0.372 0.044 257.287);
+	--color-light: oklch(96.37% 0.005 102.86); /* #f6f5f3 */
+
+	/* contrast utilities */
+	--color-primary-c-light: var(--color-primary-800);
+	--color-primary-c-dark: var(--color-primary-400);
+
+	/* semantic colors */
+	--color-error-200: oklch(0.885 0.062 18.334);
+	--color-error-400: oklch(0.704 0.191 22.216);
+	--color-error-base: oklch(0.637 0.237 25.331);
+	--color-error-light: oklch(0.936 0.032 17.717);
+	--color-error-dark: oklch(0.505 0.213 27.518);
+
+	--color-success-200: oklch(0.925 0.084 155.995);
+	--color-success-base: oklch(0.723 0.219 149.579);
+	--color-success-light: oklch(0.962 0.044 156.743);
+	--color-success-dark: oklch(0.393 0.095 152.535);
+
+	--color-info-200: var(--color-primary-200);
+	--color-info-700: var(--color-primary-700);
+	--color-info-950: var(--color-primary-950);
+	--color-info-base: var(--color-primary-400);
+	--color-info-light: var(--color-primary-100);
+	--color-info-dark: var(--color-primary-900);
+}
+
+html {
+	font-family: var(--font-sans);
+	color: var(--color-dark);
+	background-color: var(--color-light);
+}
+
+.btn-primary {
+	background-color: var(--color-primary-300);
+	transition: all;
+	cursor: pointer;
+	border: 1px solid var(--color-dark);
+	padding: 0.5rem 0.75rem;
+}
+
+.btn-primary:hover {
+	background-color: var(--color-primary-400);
+}
+
+.btn-primary:disabled {
+	background-color: #9ca3af;
+}
