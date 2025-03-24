@@ -2,6 +2,7 @@ import { DefaultLayout } from "@/layouts/default"
 import { useState } from "react"
 import { CategoryItem } from "./types"
 import { createPortal } from "react-dom"
+import { Modal } from "./components/modal"
 
 function App() {
 	const [items] = useState<CategoryItem[]>([])
@@ -68,9 +69,11 @@ function App() {
 			</section>
 			{createPortal(
 				isModalOpen ? (
-					<div style={{ position: "fixed", zIndex: 10, top: 0 }}>
-						this is the modal
-					</div>
+					<Modal
+						prompt="Select an item for your workflow"
+						onClose={() => setIsModalOpen(false)}
+						onSubmit={() => {}}
+					/>
 				) : null,
 				document.body
 			)}
