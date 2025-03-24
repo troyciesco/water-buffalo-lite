@@ -1,18 +1,21 @@
 import { CategoryItem } from "@/types"
 import styles from "./modal.module.css"
+import { cn } from "@/lib/utils"
 
 type ContentProps = {
 	items: CategoryItem[]
 	selectedItemId: string
 	onClick: (item: CategoryItem) => void
 	onDoubleClick: (item: CategoryItem) => void
+	columns?: 1 | 2
 }
 
 export function Content({
 	items,
 	selectedItemId,
 	onClick,
-	onDoubleClick
+	onDoubleClick,
+	columns = 2
 }: ContentProps) {
 	return (
 		<div className={styles.contentContainer}>
@@ -30,10 +33,20 @@ export function Content({
 						}`}
 						onClick={() => onClick(item)}
 						onDoubleClick={() => onDoubleClick(item)}>
-						<div className={styles.icon}></div>
-						<div>
+						<div
+							className={cn(
+								styles.icon,
+								columns === 1 && styles.iconSmall
+							)}></div>
+						<div className={styles.itemText}>
 							<div className={styles.itemName}>{item.name}</div>
-							<div className={styles.itemDescription}>{item.description}</div>
+							<div
+								className={cn(
+									styles.itemDescription,
+									columns === 1 && styles.descriptionWide
+								)}>
+								{item.description}
+							</div>
 						</div>
 					</button>
 				))}

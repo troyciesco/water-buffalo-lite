@@ -200,12 +200,12 @@
 
 .contentNoItems {
 	grid-column: span 2;
-	max-width: 100%;
+	width: 508px;
 }
 
 @media (min-width: 768px) {
 	.contentNoItems {
-		width: 712px;
+		width: 508px;
 	}
 }
 
@@ -258,19 +258,21 @@
 }
 
 .icon {
-	max-width: 3.75rem;
-	height: 3.75rem;
-	width: 100%;
+	max-width: 80px;
+	height: 80px;
+	width: 80px;
 	background-color: rgb(229 231 235);
 	border: 1px solid;
+
+	&.iconSmall {
+		max-width: 60px;
+		height: 60px;
+		width: 60px;
+	}
 }
 
-@media (min-width: 768px) {
-	.icon {
-		width: 5rem;
-		height: 5rem;
-		max-width: 5rem;
-	}
+.itemText {
+	text-align: left;
 }
 
 .itemName {
@@ -290,11 +292,15 @@
 	font-size: 0.875rem;
 	line-height: 1.25rem;
 	text-wrap: balance;
+	width: 150px;
+
+	&.descriptionWide {
+		width: 230px;
+	}
 }
 
 @media (min-width: 768px) {
 	.itemDescription {
-		width: 240px;
 		font-size: 1rem;
 		line-height: 1.5rem;
 	}

@@ -11,9 +11,17 @@ type ModalProps = {
 	prompt: string
 	onClose: () => void
 	onSubmit: (item: CategoryItem | null) => void
+	buttonLabels?: {
+		add?: string
+		cancel?: string
+	}
 }
-export function Modal({ prompt, onClose, onSubmit }: ModalProps) {
+export function Modal({ prompt, onClose, onSubmit, buttonLabels }: ModalProps) {
 	const { categories, items } = catalogPayload
+
+	const sortedCategories = [...categories].sort((a, b) =>
+		a.name.localeCompare(b.name)
+	)
 
 	const [searchString, setSearchString] = useState("")
 	const [selectedCategoryId, setSelectedCategoryId] = useState("")
@@ -52,7 +60,7 @@ export function Modal({ prompt, onClose, onSubmit }: ModalProps) {
 				</div>
 				<div className={styles.modalBody}>
 					<Sidebar
-						categories={categories}
+						categories={sortedCategories}
 						selectedCategoryId={selectedCategoryId}
 						setSelectedCategoryId={setSelectedCategoryId}
 					/>
@@ -78,10 +86,10 @@ export function Modal({ prompt, onClose, onSubmit }: ModalProps) {
 							className="btn-primary"
 							disabled={!selectedItem}
 							onClick={handleSubmit}>
-							Add
+							{buttonLabels?.add || "Add"}
 						</button>
 						<button onClick={onClose} className={styles.closeBtn}>
-							Close
+							{buttonLabels?.cancel || "Cancel"}
 						</button>
 					</div>
 				</div>
