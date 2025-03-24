@@ -5,6 +5,7 @@ import { Sidebar } from "./sidebar"
 import { Content } from "./content"
 import { catalogPayload } from "@/catalog-payload"
 import { CategoryItem } from "@/types"
+import { useSearch } from "@/hooks/use-search"
 
 type ModalProps = {
 	prompt: string
@@ -14,13 +15,24 @@ type ModalProps = {
 export function Modal({ prompt, onClose, onSubmit }: ModalProps) {
 	const { categories, items } = catalogPayload
 
-	const [selectedItem, setSelectedItem] = useState<CategoryItem | null>(null)
 	const [searchString, setSearchString] = useState("")
-
 	const [selectedCategoryId, setSelectedCategoryId] = useState("")
+	const { filteredItems } = useSearch({
+		items,
+		categories,
+		searchString,
+		selectedCategoryId
+	})
+
+	const [selectedItem, setSelectedItem] = useState<CategoryItem | null>(null)
 
 	const handleSubmit = () => {
-		onSubmit(selectedItem)
+		if (selectedItem) {
+			onSubmit({
+				...selectedItem,
+				id: `${selectedItem.id}-${crypto.randomUUID()}`
+			})
+		}
 		onClose()
 	}
 	return (
@@ -45,7 +57,7 @@ export function Modal({ prompt, onClose, onSubmit }: ModalProps) {
 						setSelectedCategoryId={setSelectedCategoryId}
 					/>
 					<Content
-						items={items}
+						items={filteredItems}
 						selectedItemId={selectedItem?.id || ""}
 						onClick={(item) => setSelectedItem(item)}
 						onDoubleClick={(item) => {
