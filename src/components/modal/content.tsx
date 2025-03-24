@@ -17,8 +17,10 @@ export function Content({
 	onDoubleClick,
 	columns = 2
 }: ContentProps) {
+	const showScroll = columns === 2 ? items.length > 6 : items.length > 1
 	return (
-		<div className={styles.contentContainer}>
+		<div
+			className={cn(styles.contentContainer, showScroll && styles.withScroll)}>
 			<div className={styles.contentGrid}>
 				{items.length === 0 && (
 					<div className={styles.contentNoItems}>

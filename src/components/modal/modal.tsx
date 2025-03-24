@@ -16,12 +16,16 @@ type ModalProps = {
 		cancel?: string
 	}
 }
+
 export function Modal({ prompt, onClose, onSubmit, buttonLabels }: ModalProps) {
 	const { categories, items } = catalogPayload
 
-	const sortedCategories = [...categories].sort((a, b) =>
-		a.name.localeCompare(b.name)
-	)
+	const sortedCategoriesWithItemCount = [...categories]
+		.sort((a, b) => a.name.localeCompare(b.name))
+		.map((category) => ({
+			...category,
+			count: items.filter((item) => item.category === category.id)?.length || 0
+		}))
 
 	const [searchString, setSearchString] = useState("")
 	const [selectedCategoryId, setSelectedCategoryId] = useState("")
@@ -60,7 +64,7 @@ export function Modal({ prompt, onClose, onSubmit, buttonLabels }: ModalProps) {
 				</div>
 				<div className={styles.modalBody}>
 					<Sidebar
-						categories={sortedCategories}
+						categories={sortedCategoriesWithItemCount}
 						selectedCategoryId={selectedCategoryId}
 						setSelectedCategoryId={setSelectedCategoryId}
 					/>

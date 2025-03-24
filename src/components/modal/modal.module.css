@@ -183,7 +183,10 @@
 .contentContainer {
 	padding: 0.25rem;
 	max-height: 380px;
-	overflow-y: scroll;
+	overflow-y: hidden;
+	&.withScroll {
+		overflow-y: scroll;
+	}
 }
 
 @media (min-width: 768px) {

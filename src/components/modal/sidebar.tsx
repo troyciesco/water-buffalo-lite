@@ -27,14 +27,14 @@ export function Sidebar({
 					{categories?.map((category) => (
 						<li key={category.id}>
 							<button
-								// disabled={category.items.length === 0}
+								disabled={category.count === 0}
 								onClick={() => setSelectedCategoryId(category.id)}
 								className={`${styles.categoryListItem} ${
 									selectedCategoryId === category.id
 										? styles.categoryListItemSelected
 										: ""
 								}`}>
-								{category.name}
+								{category.name} {category.count === 0 && "(no items)"}
 							</button>
 						</li>
 					))}
