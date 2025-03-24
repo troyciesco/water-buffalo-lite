@@ -1,5 +1,5 @@
 import { CategoryItem } from "@/types"
-import styles from "./modal.module.css"
+import styles from "./content.module.css"
 import { cn } from "@/lib/utils"
 
 type ContentProps = {

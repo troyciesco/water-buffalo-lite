@@ -1,5 +1,5 @@
 import { Category } from "@/types"
-import styles from "./modal.module.css"
+import styles from "./sidebar.module.css"
 type SidebarProps = {
 	categories: Category[]
 	selectedCategoryId: string
