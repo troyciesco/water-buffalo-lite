@@ -1,10 +1,11 @@
+import { CategoryItem } from "@/types"
 import styles from "./modal.module.css"
 
 type ContentProps = {
-	items: any[]
+	items: CategoryItem[]
 	selectedItemId: string
-	onClick: (item: any) => void
-	onDoubleClick: (item: any) => void
+	onClick: (item: CategoryItem) => void
+	onDoubleClick: (item: CategoryItem) => void
 }
 
 export function Content({
@@ -15,8 +16,6 @@ export function Content({
 }: ContentProps) {
 	return (
 		<div className={styles.contentContainer}>
-			{/* {loading && <div>loading</div>}
-    {error && <div>error :(</div>} */}
 			<div className={styles.contentGrid}>
 				{items.length === 0 && (
 					<div className={styles.contentNoItems}>
@@ -26,7 +25,9 @@ export function Content({
 				{items.map((item) => (
 					<button
 						key={item.id}
-						className={styles.item}
+						className={`${styles.item} ${
+							selectedItemId === item.id ? styles.itemSelected : ""
+						}`}
 						onClick={() => onClick(item)}
 						onDoubleClick={() => onDoubleClick(item)}>
 						<div className={styles.icon}></div>

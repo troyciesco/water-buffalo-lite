@@ -5,7 +5,7 @@ import { createPortal } from "react-dom"
 import { Modal } from "./components/modal"
 
 function App() {
-	const [items] = useState<CategoryItem[]>([])
+	const [items, setItems] = useState<CategoryItem[]>([])
 	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	return (
@@ -72,7 +72,7 @@ function App() {
 					<Modal
 						prompt="Select an item for your workflow"
 						onClose={() => setIsModalOpen(false)}
-						onSubmit={() => {}}
+						onSubmit={(item) => item && setItems((prev) => [...prev, item])}
 					/>
 				) : null,
 				document.body

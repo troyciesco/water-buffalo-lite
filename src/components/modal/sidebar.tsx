@@ -1,26 +1,43 @@
+import { Category } from "@/types"
 import styles from "./modal.module.css"
 type SidebarProps = {
-	categories: any[]
+	categories: Category[]
 	selectedCategoryId: string
 	setSelectedCategoryId: (id: string) => void
-	loading: boolean
-	error?: any
 }
 
 export function Sidebar({
 	categories,
 	selectedCategoryId,
 	setSelectedCategoryId
-}: // loading,
-// error
-SidebarProps) {
+}: SidebarProps) {
 	return (
 		<div className={styles.sidebarContainer}>
 			{categories && (
 				<ul className={styles.categoryList}>
 					<li>
-						<button className={`${styles.categoryItem}`}>All</button>
+						<button
+							onClick={() => setSelectedCategoryId("")}
+							className={`${styles.categoryListItem} ${
+								selectedCategoryId === "" ? styles.categoryListItemSelected : ""
+							}`}>
+							All
+						</button>
 					</li>
+					{categories?.map((category) => (
+						<li key={category.id}>
+							<button
+								// disabled={category.items.length === 0}
+								onClick={() => setSelectedCategoryId(category.id)}
+								className={`${styles.categoryListItem} ${
+									selectedCategoryId === category.id
+										? styles.categoryListItemSelected
+										: ""
+								}`}>
+								{category.name}
+							</button>
+						</li>
+					))}
 				</ul>
 			)}
 		</div>

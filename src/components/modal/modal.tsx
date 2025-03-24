@@ -3,20 +3,26 @@ import styles from "./modal.module.css"
 import { useState } from "react"
 import { Sidebar } from "./sidebar"
 import { Content } from "./content"
+import { catalogPayload } from "@/catalog-payload"
+import { CategoryItem } from "@/types"
 
 type ModalProps = {
 	prompt: string
 	onClose: () => void
-	onSubmit: (item: any | null) => void
+	onSubmit: (item: CategoryItem | null) => void
 }
 export function Modal({ prompt, onClose, onSubmit }: ModalProps) {
-	const { loading, error, data } = { loading: false, error: false, data: [] }
+	const { categories, items } = catalogPayload
 
-	const [selectedItem, setSelectedItem] = useState<any | null>(null)
+	const [selectedItem, setSelectedItem] = useState<CategoryItem | null>(null)
 	const [searchString, setSearchString] = useState("")
 
 	const [selectedCategoryId, setSelectedCategoryId] = useState("")
 
+	const handleSubmit = () => {
+		onSubmit(selectedItem)
+		onClose()
+	}
 	return (
 		<div className={styles.modal}>
 			<Overlay onClose={onClose} />
@@ -34,18 +40,17 @@ export function Modal({ prompt, onClose, onSubmit }: ModalProps) {
 				</div>
 				<div className={styles.modalBody}>
 					<Sidebar
-						categories={[]}
+						categories={categories}
 						selectedCategoryId={selectedCategoryId}
 						setSelectedCategoryId={setSelectedCategoryId}
-						loading={loading}
-						error={error}
 					/>
 					<Content
-						items={[]}
+						items={items}
 						selectedItemId={selectedItem?.id || ""}
 						onClick={(item) => setSelectedItem(item)}
 						onDoubleClick={(item) => {
 							setSelectedItem(item)
+							handleSubmit()
 						}}
 					/>
 				</div>
@@ -57,7 +62,12 @@ export function Modal({ prompt, onClose, onSubmit }: ModalProps) {
 								Selected: {selectedItem.name}
 							</div>
 						)}
-						<button className="btn-primary">Add</button>
+						<button
+							className="btn-primary"
+							disabled={!selectedItem}
+							onClick={handleSubmit}>
+							Add
+						</button>
 						<button onClick={onClose} className={styles.closeBtn}>
 							Close
 						</button>
